@@ -11,3 +11,6 @@ class VehicleRepository:
     def insert(self, model: VehicleDomainModel):
         result = self.collection.objects.create(**model.to_dict())
         return result
+
+    def find_record_by_color(self, color: str):
+        return self.collection.objects.filter(color=color)

@@ -6,9 +6,11 @@ from src.domain.entities.AdminUser import Admin
 from src.domain.entities.Driver import Driver
 from src.domain.entities.Vehicle import Vehicle
 from src.domain.entities.Road import Road
+from src.domain.entities.TrafficLog import TrafficLog
 from src.domain.entities.TollStation import TollStation
 from src.repository.RoadRepository import RoadRepository
 from src.repository.TollRepository import TollRepository
+from src.repository.TrafficLogRepository import TrafficLogRepository
 
 
 class RepositoryProvider:
@@ -33,7 +35,12 @@ class RepositoryProvider:
     def make_Toll(self):
         collection = TollStation
         return TollRepository(collection)
-    
+
+    def make_traffic_log(self):
+        collection = TrafficLog
+        return TrafficLogRepository(collection)
+
+
 
 
 

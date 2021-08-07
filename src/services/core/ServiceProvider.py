@@ -4,6 +4,7 @@ from src.services.DriverService import DriverService
 from src.services.VehicleService import VehicleService
 from src.services.RoadService import RoadService
 from src.services.TollService import TollService
+from src.services.TrafficLogService import TrafficLogService
 
 
 class ServiceProvider:
@@ -22,13 +23,17 @@ class ServiceProvider:
         return DriverService(self.repository_provider.make_driver())
 
     def make_vehicle_service(self):
-        return VehicleService(self.repository_provider.make_vehicle())
+        return VehicleService(self.repository_provider.make_vehicle(), self.repository_provider.make_driver())
 
     def make_road_service(self):
         return RoadService(self.repository_provider.make_road())
 
     def make_toll_service(self):
         return TollService(self.repository_provider.make_Toll())
+
+    def make_traffic_log_service(self):
+        return TrafficLogService(self.repository_provider.make_traffic_log())
+
 
 
 

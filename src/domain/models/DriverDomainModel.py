@@ -16,3 +16,17 @@ class DriverDomainModel:
                 "national_code": self.national_code,
 
                 }
+
+    @staticmethod
+    def asJSON(drivers):
+        list_drivers = []
+        for item in drivers:
+            result = {
+
+                'name': item.name,
+                'birthdate': item.birthdate,
+                'national_code': item.national_code
+
+            }
+            list_drivers.append(result)
+        return list_drivers

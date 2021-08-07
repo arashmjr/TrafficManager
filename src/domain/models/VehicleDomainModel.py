@@ -31,3 +31,20 @@ class VehicleDomainModel:
                 "year": self.year
 
                 }
+
+    @staticmethod
+    def asJSON(vehicles):
+        list_vehicles = []
+        for item in vehicles:
+            result = {
+
+                'owner_id': item.owner_id.driver_id,
+                'color': item.color,
+                'type': item.type,
+                'weight': item.weight,
+                'height': item.height,
+                'model': item.model,
+                'year': item.year
+            }
+            list_vehicles.append(result)
+        return list_vehicles

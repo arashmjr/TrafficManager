@@ -20,3 +20,30 @@ def add_vehicle(request):
     except ValueError:
         response = BaseError(MessageIds.ERROR_BAD_JSON)
         return JsonResponse(response.serialize(), status=status.HTTP_400_BAD_REQUEST)
+
+
+@csrf_exempt
+def get_vehicles_by_color(self):
+    try:
+        service = ServiceProvider().make_vehicle_service()
+        vehicles = service.get_vehicles_by_color()
+        response = BaseResponse(vehicles, True, MessageIds.SUCCESS)
+        return JsonResponse(response.serialize(), safe=False, status=status.HTTP_201_CREATED)
+
+    except ValueError:
+        response = BaseError(MessageIds.ERROR_BAD_JSON)
+        return JsonResponse(response.serialize(), status=status.HTTP_400_BAD_REQUEST)
+
+
+@csrf_exempt
+def get_vehicles_by_age(self):
+    try:
+        service = ServiceProvider().make_vehicle_service()
+        vehicles = service.get_vehicles_by_age()
+        response = BaseResponse(vehicles, True, MessageIds.SUCCESS)
+        return JsonResponse(response.serialize(), safe=False, status=status.HTTP_201_CREATED)
+
+    except ValueError:
+        response = BaseError(MessageIds.ERROR_BAD_JSON)
+        return JsonResponse(response.serialize(), status=status.HTTP_400_BAD_REQUEST)
+    
