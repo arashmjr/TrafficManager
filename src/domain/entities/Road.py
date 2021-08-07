@@ -6,7 +6,7 @@ class Road(models.Model):
     name = models.CharField(max_length=40, blank=False, null=False)
     origin = models.CharField(blank=False, max_length=40)
     destination = models.CharField(blank=False, max_length=40)
-    minimum_height = models.IntegerField(blank=False)
-    width = models.IntegerField(blank=False)
+    minimum_height = models.FloatField(blank=False)
+    width = models.FloatField(blank=False)
 
 

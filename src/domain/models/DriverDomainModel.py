@@ -1,6 +1,3 @@
-import datetime
-
-
 class DriverDomainModel:
     name: str
     birthdate: int

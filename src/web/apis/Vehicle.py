@@ -8,12 +8,12 @@ import json
 
 
 @csrf_exempt
-def add_driver(request):
+def add_vehicle(request):
     json_data = json.loads(request.body)
 
     try:
-        service = ServiceProvider().make_driver_service()
-        service.add_driver(json_data)
+        service = ServiceProvider().make_vehicle_service()
+        service.add_vehicle(json_data)
         response = BaseResponse({}, True, MessageIds.SUCCESS)
         return JsonResponse(response.serialize(), safe=False, status=status.HTTP_201_CREATED)
 

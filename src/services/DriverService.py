@@ -11,7 +11,7 @@ class DriverService:
         self.repository_driver = repository_driver
 
     def add_driver(self, json: str):
-        print('s')
+
         model = DriverDomainModel(json['name'], json['birthdate'], json['national_code'])
         self.repository_driver.insert(model)
 
