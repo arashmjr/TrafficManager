@@ -22,5 +22,13 @@ class TrafficLogService:
         self.repository_log.insert(model)
         return True
 
+    def get_logs_by_type_width(self):
+        arr = []
+        logs_by_type = self.repository_log.find_record_by_vehicle_type('heavy')
+        logs_type = TrafficLogDomainModel.asJSON(logs_by_type)
+        for item in logs_type:
+            if item['road_width'] <= 20:
+                arr.append(item)
 
+        return arr
 

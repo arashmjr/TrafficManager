@@ -1,3 +1,5 @@
+from src.domain.entities.Vehicle import Vehicle
+from src.domain.entities.Road import Road
 import datetime
 
 
@@ -27,8 +29,8 @@ class TrafficLogDomainModel:
 
     def to_dict(self):
         return {
-                "road_id": self.road_id,
-                "vehicle_id": self.vehicle_id,
+                "road_id": Road(self.road_id),
+                "vehicle_id": Vehicle(self.vehicle_id),
                 "vehicle_type": self.vehicle_type,
                 "vehicle_color": self.vehicle_color,
                 "road_width": self.road_width,
@@ -38,3 +40,22 @@ class TrafficLogDomainModel:
                 "longitude": self.longitude
 
                 }
+
+    @staticmethod
+    def asJSON(logs):
+        list_logs = []
+        for item in logs:
+            result = {
+
+                'road_id': item.road_id.road_id,
+                'vehicle_id': item.vehicle_id.vehicle_id,
+                'vehicle_type': item.vehicle_type,
+                'vehicle_color': item.vehicle_color,
+                'road_width': item.road_width,
+                'date': item.date,
+                'province_name': item.province_name,
+                'latitude': item.latitude,
+                'longitude': item.longitude
+            }
+            list_logs.append(result)
+        return list_logs

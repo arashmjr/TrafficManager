@@ -14,3 +14,6 @@ class VehicleRepository:
 
     def find_record_by_color(self, color: str):
         return self.collection.objects.filter(color=color)
+
+    def find_record_by_owner_id(self, owner_id: int):
+        return self.collection.objects.filter(owner_id=owner_id)

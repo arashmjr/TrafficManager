@@ -8,12 +8,12 @@ import json
 
 
 @csrf_exempt
-def add_traffic_log(request):
+def add_payment(request):
     json_data = json.loads(request.body)
 
     try:
-        service = ServiceProvider().make_traffic_log_service()
-        service.add_traffic_log(json_data)
+        service = ServiceProvider().make_payment_service()
+        service.add_payment(json_data)
         response = BaseResponse({}, True, MessageIds.SUCCESS)
         return JsonResponse(response.serialize(), safe=False, status=status.HTTP_201_CREATED)
 
@@ -23,12 +23,13 @@ def add_traffic_log(request):
 
 
 @csrf_exempt
-def get_logs_by_type_width(self):
+def get_vehicle_payment(request):
+    json_data = json.loads(request.body)
 
     try:
-        service = ServiceProvider().make_traffic_log_service()
-        vehicles = service.get_logs_by_type_width()
-        response = BaseResponse(vehicles, True, MessageIds.SUCCESS)
+        service = ServiceProvider().make_payment_service()
+        payments = service.get_vehicle_payment(json_data)
+        response = BaseResponse(payments, True, MessageIds.SUCCESS)
         return JsonResponse(response.serialize(), safe=False, status=status.HTTP_201_CREATED)
 
     except ValueError:

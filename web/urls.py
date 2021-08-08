@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from src.web.apis import AdminAuth, Driver, Vehicle, Road, TollStation, TrafficLog
+from src.web.apis import AdminAuth, Driver, Vehicle, Road, TollStation, TrafficLog, Payment
 
 
 urlpatterns = [
@@ -12,6 +12,9 @@ urlpatterns = [
     url(r'^GetVehiclesByColor/$', Vehicle.get_vehicles_by_color),
     url(r'^GetVehiclesByAge/$', Vehicle.get_vehicles_by_age),
     url(r'^AddTrafficLog/$', TrafficLog.add_traffic_log),
+    url(r'^GetLogs_By_Type_width/$', TrafficLog.get_logs_by_type_width),
+    url(r'^AddPayment/$', Payment.add_payment),
+    url(r'^GetVehiclePayment/$', Payment.get_vehicle_payment),
 
 ]
 

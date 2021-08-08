@@ -5,6 +5,7 @@ from src.services.VehicleService import VehicleService
 from src.services.RoadService import RoadService
 from src.services.TollService import TollService
 from src.services.TrafficLogService import TrafficLogService
+from src.services.PaymentService import PaymentService
 
 
 class ServiceProvider:
@@ -33,6 +34,10 @@ class ServiceProvider:
 
     def make_traffic_log_service(self):
         return TrafficLogService(self.repository_provider.make_traffic_log())
+
+    def make_payment_service(self):
+        return PaymentService(self.repository_provider.make_payment())
+
 
 
 
