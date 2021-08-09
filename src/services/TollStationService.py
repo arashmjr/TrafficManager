@@ -3,7 +3,7 @@ from src.domain.models.TollDomainModel import TollDomainModel
 from django.core.handlers.wsgi import WSGIRequest
 
 
-class TollService:
+class PayTollService:
     repository_toll: TollRepository
 
     def __init__(self, repository_toll: TollRepository):
