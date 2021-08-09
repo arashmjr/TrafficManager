@@ -7,7 +7,13 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 
 
+# @is_admin_only
 @csrf_exempt
+def handler(request):
+    if request.method == 'POST':
+        return add_road(request)
+
+
 def add_road(request):
     json_data = json.loads(request.body)
 

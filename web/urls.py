@@ -3,18 +3,15 @@ from src.web.apis import AdminAuth, Driver, Vehicle, Road, TollStation, TrafficL
 
 
 urlpatterns = [
-    url(r'^SignupAdmin/$', AdminAuth.sign_up_admin),
-    url(r'^LoginAdmin/$', AdminAuth.login_admin),
-    url(r'^AddDriver/$', Driver.add_driver),
-    url(r'^AddVehicle/$', Vehicle.add_vehicle),
-    url(r'^AddRoad/$', Road.add_road),
-    url(r'^AddTollStation/$', TollStation.add_toll),
-    url(r'^GetVehiclesByColor/$', Vehicle.get_vehicles_by_color),
-    url(r'^GetVehiclesByAge/$', Vehicle.get_vehicles_by_age),
-    url(r'^AddTrafficLog/$', TrafficLog.add_traffic_log),
-    url(r'^GetLogs_By_Type_width/$', TrafficLog.get_logs_by_type_width),
-    url(r'^AddPayment/$', Payment.add_payment),
-    url(r'^GetVehiclePayment/$', Payment.get_vehicle_payment),
+    url(r'^auth/admin/signup$', AdminAuth.sign_up_admin),
+    url(r'^auth/admin/login$', AdminAuth.login_admin),
+    url(r'^dashboard/admin/driver/$', Driver.handler),
+    url(r'^dashboard/admin/vehicle/$', Vehicle.handler),
+    url(r'^dashboard/admin/road/$', Road.handler),
+    url(r'^dashboard/admin/tollStation/$', TollStation.handler),
+    url(r'^dashboard/admin/trafficLog/$', TrafficLog.handler),
+    #url(r'^admin/payment/$', Payment.add_payment),#repeated
+    url(r'^admin/payment/$', Payment.handler),
 
 ]
 

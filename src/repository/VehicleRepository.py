@@ -17,3 +17,19 @@ class VehicleRepository:
 
     def find_record_by_owner_id(self, owner_id: int):
         return self.collection.objects.filter(owner_id=owner_id)
+
+    def find_record_by_list_owner_id(self, array: list):
+        list_vehicles = []
+        for item in array:
+            records = self.collection.objects.filter(owner_id=item['driver_id'])
+            for segment in records:
+                list_vehicles.append(segment)
+
+        return list_vehicles
+
+
+
+
+
+
+

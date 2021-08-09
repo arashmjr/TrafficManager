@@ -11,3 +11,7 @@ class TollRepository:
     def insert(self, model: TollDomainModel):
         result = self.collection.objects.create(**model.to_dict())
         return result
+
+    def get_logs(self, *args, **kwargs):
+        # print(self.collection.objects.filter(&kwargs))
+        return self.collection.objects.filter(*args, **kwargs)

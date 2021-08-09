@@ -1,5 +1,6 @@
 from django.db import models
 from src.domain.entities.Road import Road
+from src.domain.entities.TollStation import TollStation
 from src.domain.entities.Vehicle import Vehicle
 import datetime
 

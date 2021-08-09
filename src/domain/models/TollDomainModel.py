@@ -32,3 +32,20 @@ class TollDomainModel:
                 "longitude": self.longitude
 
                 }
+
+    @staticmethod
+    def asJSON(station_tolls):
+        list_station_tolls = []
+        for item in station_tolls:
+            result = {
+
+                'road_id': item.road_id.road_id,
+                'name': item.name,
+                'heavy_vehicle_charge': item.heavy_vehicle_charge,
+                'light_vehicle_charge': item.light_vehicle_charge,
+                'heavy_vehicle_charge_per_kg': item.heavy_vehicle_charge_per_kg,
+                'latitude': item.latitude,
+                'longitude': item.longitude
+            }
+            list_station_tolls.append(result)
+        return list_station_tolls

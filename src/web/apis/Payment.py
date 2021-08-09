@@ -23,12 +23,12 @@ def add_payment(request):
 
 
 @csrf_exempt
-def get_vehicle_payment(request):
+def handler(request):
     json_data = json.loads(request.body)
 
     try:
         service = ServiceProvider().make_payment_service()
-        payments = service.get_vehicle_payment(json_data)
+        payments = service.handler(json_data)
         response = BaseResponse(payments, True, MessageIds.SUCCESS)
         return JsonResponse(response.serialize(), safe=False, status=status.HTTP_201_CREATED)
 

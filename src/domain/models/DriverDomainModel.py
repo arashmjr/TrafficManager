@@ -22,7 +22,7 @@ class DriverDomainModel:
         list_drivers = []
         for item in drivers:
             result = {
-
+                'driver_id': item.driver_id,
                 'name': item.name,
                 'birthdate': item.birthdate,
                 'national_code': item.national_code

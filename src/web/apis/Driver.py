@@ -1,14 +1,22 @@
+from django.core.handlers.wsgi import WSGIRequest
 from src.services.core.ServiceProvider import ServiceProvider
 from src.web.dtos.BaseResponse import BaseResponse, BaseError
 from src.web.utils.Localizations import MessageIds
 from rest_framework import status
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from src.services.Manager.AuthorizationManager import is_admin_only
 import json
 
 
+# @is_admin_only
 @csrf_exempt
-def add_driver(request):
+def handler(request):
+    if request.method == 'POST':
+        return add_drivers(request)
+
+
+def add_drivers(request: WSGIRequest):
     json_data = json.loads(request.body)
 
     try:

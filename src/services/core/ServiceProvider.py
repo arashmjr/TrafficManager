@@ -3,7 +3,7 @@ from src.services.AuthAdminService import AuthAdminService
 from src.services.DriverService import DriverService
 from src.services.VehicleService import VehicleService
 from src.services.RoadService import RoadService
-from src.services.TollService import TollService
+from src.services.TollStationService import TollStationService
 from src.services.TrafficLogService import TrafficLogService
 from src.services.PaymentService import PaymentService
 
@@ -29,11 +29,11 @@ class ServiceProvider:
     def make_road_service(self):
         return RoadService(self.repository_provider.make_road())
 
-    def make_toll_service(self):
-        return TollService(self.repository_provider.make_Toll())
+    def make_toll_station_service(self):
+        return TollStationService(self.repository_provider.make_Toll())
 
     def make_traffic_log_service(self):
-        return TrafficLogService(self.repository_provider.make_traffic_log())
+        return TrafficLogService(self.repository_provider.make_traffic_log(), self.repository_provider.make_Toll())
 
     def make_payment_service(self):
         return PaymentService(self.repository_provider.make_payment())

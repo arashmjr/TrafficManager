@@ -20,6 +20,13 @@ class VehicleService:
         model = VehicleDomainModel(json['owner_id'], json['color'], json['type'], json['weight'],
                                   json['height'], json['model'], json['year'])
 
+        documents = self.repository_vehicle.find_record_by_owner_id(model.owner_id)
+        records = VehicleDomainModel.asJSON(documents)
+        if records is not None:
+            for item in records:
+                if item['type'] == 'heavy':
+                    raise Exception("Sorry, this owner can't have more than one heavy vehicle")
+
         self.repository_vehicle.insert(model)
         return True
 
@@ -32,6 +39,7 @@ class VehicleService:
         return list_vehicle
 
     def get_vehicles_by_age(self):
+
         drivers = self.repository_driver.get_all()
         list_drivers = DriverDomainModel.asJSON(drivers)
         date = datetime.date.today().year
@@ -41,6 +49,8 @@ class VehicleService:
             if Age > 70:
                 arr_drivers.append(item)
 
-        return arr_drivers
-
+        obj_vehicles = self.repository_vehicle.find_record_by_list_owner_id(arr_drivers)
+        list_vehicles = VehicleDomainModel.asJSON(obj_vehicles)
+        print(list_vehicles)
+        return list_vehicles
 

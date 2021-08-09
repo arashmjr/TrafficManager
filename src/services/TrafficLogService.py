@@ -1,16 +1,20 @@
-from src.repository.VehicleRepository import VehicleRepository
+from src.domain.models.TollDomainModel import TollDomainModel
+from src.repository.TollRepository import TollRepository
 from src.repository.TrafficLogRepository import TrafficLogRepository
 from src.domain.models.TrafficLogDomainModel import TrafficLogDomainModel
 from django.core.handlers.wsgi import WSGIRequest
 from itertools import chain
+import haversine as hs
 import datetime
 
 
 class TrafficLogService:
     repository_log: TrafficLogRepository
+    repository_station: TollRepository
 
-    def __init__(self, repository_log: TrafficLogRepository):
+    def __init__(self, repository_log: TrafficLogRepository, repository_station: TollRepository):
         self.repository_log = repository_log
+        self.repository_station = repository_station
 
     def add_traffic_log(self, json: str):
 
@@ -22,13 +26,31 @@ class TrafficLogService:
         self.repository_log.insert(model)
         return True
 
-    def get_logs_by_type_width(self):
-        arr = []
-        logs_by_type = self.repository_log.find_record_by_vehicle_type('heavy')
-        logs_type = TrafficLogDomainModel.asJSON(logs_by_type)
-        for item in logs_type:
-            if item['road_width'] <= 20:
-                arr.append(item)
+    def get_logs_by(self, max_road_width: int, vehicle_type: str):
+        logs = self.repository_log.get_logs(road_width__lte=max_road_width, vehicle_type=vehicle_type)
 
-        return arr
+        return TrafficLogDomainModel.asJSON(logs)
+
+    def get_logs_near_toll_station(self, province: str, distance: int, toll_station_name: str, vehicle_type: str):
+
+        station_query = self.repository_station.get_logs(name=toll_station_name)
+        stations = TollDomainModel.asJSON(station_query)
+
+        if stations == []:
+            raise FileExistsError
+
+        station = stations[0]
+        station_location = (station['latitude'], station['longitude'])
+        province_logs_by_type = self.repository_log.get_logs(province_name=province, vehicle_type=vehicle_type)
+        # print(province_logs_by_type)
+
+        results = []
+        if province_logs_by_type is not None:
+            for log in province_logs_by_type:
+                log_location = (log.latitude, log.longitude)
+                distance_from_stations = hs.haversine(log_location, station_location) * 1000
+                if distance_from_stations < int(distance):
+                    results.append(log)
+
+        return TrafficLogDomainModel.asJSON(results)
 
