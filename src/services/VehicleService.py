@@ -15,7 +15,7 @@ class VehicleService:
         self.repository_vehicle = repository_vehicle
         self.repository_driver = repository_driver
 
-    def add_vehicle(self, json: str):
+    def add_vehicle(self, json):
 
         model = VehicleDomainModel(json['owner_id'], json['color'], json['type'], json['weight'],
                                   json['height'], json['model'], json['year'])
@@ -30,27 +30,25 @@ class VehicleService:
         self.repository_vehicle.insert(model)
         return True
 
-    def get_vehicles_by_color(self):
-        vehicle_red = self.repository_vehicle.find_record_by_color('red')
-        vehicle_blue = self.repository_vehicle.find_record_by_color('blue')
-        vehicles = list(chain(vehicle_red, vehicle_blue))
-        list_vehicle = VehicleDomainModel.asJSON(vehicles)
+    def get_vehicles_by_color(self, colors):
+        filtered_vehicles = self.repository_vehicle.find_record_by_colors(colors)
+        list_vehicle = VehicleDomainModel.asJSON(filtered_vehicles)
 
         return list_vehicle
 
-    def get_vehicles_by_age(self):
+    def get_vehicles_by_age(self, age):
 
         drivers = self.repository_driver.get_all()
         list_drivers = DriverDomainModel.asJSON(drivers)
         date = datetime.date.today().year
         arr_drivers = []
         for item in list_drivers:
-            Age = int(date) - item['birthdate']
-            if Age > 70:
+            Age_drivers = int(date) - item['birthdate']
+            if Age_drivers > int(age):
                 arr_drivers.append(item)
 
         obj_vehicles = self.repository_vehicle.find_record_by_list_owner_id(arr_drivers)
         list_vehicles = VehicleDomainModel.asJSON(obj_vehicles)
-        print(list_vehicles)
+
         return list_vehicles
 

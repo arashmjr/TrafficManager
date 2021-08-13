@@ -12,11 +12,9 @@ class AuthAdminService:
     regex = '^[a-zA-Z0-9]+[\._]?[a-zA-Z0-9]+[@]\w+[.]\w{2,3}$'
 
     def __init__(self, repository_admin: AdminUserRepository):
-
         self.repository_admin = repository_admin
 
-
-    def sign_up_admin(self, json: str) -> str:
+    def sign_up_admin(self, json) -> str:
 
         if re.search(self.regex, json['email']):
             record = self.repository_admin.find_record_by_email_signup(json['email'])
@@ -49,7 +47,7 @@ class AuthAdminService:
 
         raise ValueError
 
-    def login_admin(self, json: str) -> str:
+    def login_admin(self, json) -> str:
 
         if re.search(self.regex, json['email']):
             record = self.repository_admin.find_record_by_email(json['email'])

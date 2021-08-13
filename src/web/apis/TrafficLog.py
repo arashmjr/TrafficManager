@@ -1,5 +1,4 @@
 from django.core.handlers.wsgi import WSGIRequest
-
 from src.services.Manager.AuthorizationManager import is_admin_only
 from src.services.core.ServiceProvider import ServiceProvider
 from src.web.dtos.BaseResponse import BaseResponse, BaseError
@@ -10,7 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 
 
-# @is_admin_only
+@is_admin_only
 @csrf_exempt
 def handler(request):
     if request.method == 'GET':
@@ -44,7 +43,7 @@ def get_logs(request: WSGIRequest):
         if max_road_width is not None and vehicle_type is not None:
             logs = service.get_logs_by(max_road_width=max_road_width, vehicle_type=vehicle_type)
             response = BaseResponse(logs, True, MessageIds.SUCCESS)
-            return JsonResponse(response.serialize(), safe=False, status=status.HTTP_201_CREATED)
+            return JsonResponse(response.serialize(), safe=False, status=status.HTTP_200_OK)
 
         # province = tehran & tollStationName = 1 & distance = 600
 
@@ -52,11 +51,11 @@ def get_logs(request: WSGIRequest):
         toll_station_name = request.GET.get("tollStationName")
         distance = request.GET.get("distance")
         vehicle_type = request.GET.get("vehicleType")
-
+        minutes = request.GET.get("minutesFromNow")
         if province is not None and toll_station_name is not None and distance is not None and vehicle_type is not None:
-            logs = service.get_logs_near_toll_station(province, distance, toll_station_name, vehicle_type)
+            logs = service.get_logs_near_toll_station(province, distance, toll_station_name, vehicle_type, int(minutes))
             response = BaseResponse(logs, True, MessageIds.SUCCESS)
-            return JsonResponse(response.serialize(), safe=False, status=status.HTTP_201_CREATED)
+            return JsonResponse(response.serialize(), safe=False, status=status.HTTP_200_OK)
 
     except ValueError:
         response = BaseError(MessageIds.ERROR_BAD_JSON)

@@ -47,3 +47,16 @@ class PaymentDomainModel:
             }
             list_payments.append(result)
         return list_payments
+
+    @staticmethod
+    def as_json(payments):
+        list_payments = []
+        for item in payments:
+            result = {
+                'owner_id': item.vehicle_id.owner_id.driver_id,
+                'vehicle_id': item.vehicle_id.vehicle_id,
+                'value': item.value,
+                'status': item.status
+            }
+            list_payments.append(result)
+        return list_payments

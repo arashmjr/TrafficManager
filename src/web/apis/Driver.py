@@ -9,11 +9,14 @@ from src.services.Manager.AuthorizationManager import is_admin_only
 import json
 
 
-# @is_admin_only
+@is_admin_only
 @csrf_exempt
 def handler(request):
     if request.method == 'POST':
         return add_drivers(request)
+
+    if request.method == 'GET':
+        return get_owners_by_notpaid_status(request)
 
 
 def add_drivers(request: WSGIRequest):
@@ -24,6 +27,19 @@ def add_drivers(request: WSGIRequest):
         service.add_driver(json_data)
         response = BaseResponse({}, True, MessageIds.SUCCESS)
         return JsonResponse(response.serialize(), safe=False, status=status.HTTP_201_CREATED)
+
+    except ValueError:
+        response = BaseError(MessageIds.ERROR_BAD_JSON)
+        return JsonResponse(response.serialize(), status=status.HTTP_400_BAD_REQUEST)
+
+
+def get_owners_by_notpaid_status(request: WSGIRequest):
+    try:
+        service = ServiceProvider().make_driver_service()
+
+        owners = service.get_owners_by_notpaid_status()
+        response = BaseResponse(owners, True, MessageIds.SUCCESS)
+        return JsonResponse(response.serialize(), safe=False, status=status.HTTP_200_OK)
 
     except ValueError:
         response = BaseError(MessageIds.ERROR_BAD_JSON)

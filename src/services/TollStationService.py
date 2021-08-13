@@ -9,7 +9,7 @@ class TollStationService:
     def __init__(self, repository_toll: TollRepository):
         self.repository_toll = repository_toll
 
-    def add_toll_station(self, json: str):
+    def add_toll_station(self, json):
 
         model = TollDomainModel(json['road_id'], json['name'], json['heavy_vehicle_charge'],
                                 json['light_vehicle_charge'], json['heavy_vehicle_charge_per_kg'],

@@ -9,7 +9,7 @@ class RoadService:
     def __init__(self, repository_road: RoadRepository):
         self.repository_road = repository_road
 
-    def add_road(self, json: str):
+    def add_road(self, json):
 
         model = RoadDomainModel(json['name'], json['origin'], json['destination'], json['minimum_height'], json['width'])
 

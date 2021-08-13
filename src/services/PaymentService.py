@@ -1,8 +1,5 @@
 from src.repository.PaymentRepository import PaymentRepository
-from src.domain.models.VehicleDomainModel import VehicleDomainModel
 from src.domain.models.PaymentDomainModel import PaymentDomainModel
-from django.core.handlers.wsgi import WSGIRequest
-from itertools import chain
 import datetime
 
 
@@ -12,7 +9,7 @@ class PaymentService:
     def __init__(self, repository_payment: PaymentRepository):
         self.repository_payment = repository_payment
 
-    def add_payment(self, json: str):
+    def add_payment(self, json):
 
         date = datetime.date.today()
         model = PaymentDomainModel(json['vehicle_id'], json['toll_id'], json['road_id'], json['value'], date,
@@ -21,11 +18,13 @@ class PaymentService:
         self.repository_payment.insert(model)
         return True
 
-    def get_vehicle_payment(self, json: str):
+    def get_vehicle_payment_by_date(self, range_date, vehicle_id):
 
-        objects = self.repository_payment.find_record_by_date_range([json['start_date'], json['end_date']])
+        objects = self.repository_payment.find_record_by_date_range(range_date, vehicle_id)
         records = PaymentDomainModel.asJSON(objects)
         return records
+
+
 
 
 

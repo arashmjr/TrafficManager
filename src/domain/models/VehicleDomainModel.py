@@ -36,6 +36,7 @@ class VehicleDomainModel:
     def asJSON(vehicles):
         list_vehicles = []
         for item in vehicles:
+
             result = {
 
                 'owner_id': item.owner_id.driver_id,

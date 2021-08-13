@@ -1,1 +1,0 @@
-admin_api_secret: str = "W14dmR5dDFjQ3RaYeUsBiUW1Wb2NR3dyUNWeUsyMXBibVE2NR3dyUW14dmR5dDFjQ3"

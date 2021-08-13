@@ -21,7 +21,8 @@ class ServiceProvider:
         return AuthAdminService(self.repository_provider.make_admin_profile())
 
     def make_driver_service(self):
-        return DriverService(self.repository_provider.make_driver())
+        return DriverService(self.repository_provider.make_driver(), self.repository_provider.make_payment(),
+                             self.repository_provider.make_vehicle())
 
     def make_vehicle_service(self):
         return VehicleService(self.repository_provider.make_vehicle(), self.repository_provider.make_driver())

@@ -1,3 +1,4 @@
+from src.services.Manager.AuthorizationManager import is_admin_only
 from src.services.core.ServiceProvider import ServiceProvider
 from src.web.dtos.BaseResponse import BaseResponse, BaseError
 from src.web.utils.Localizations import MessageIds
@@ -7,7 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 
 
-# @is_admin_only
+@is_admin_only
 @csrf_exempt
 def handler(request):
     if request.method == 'POST':

@@ -10,8 +10,7 @@ urlpatterns = [
     url(r'^dashboard/admin/road/$', Road.handler),
     url(r'^dashboard/admin/tollStation/$', TollStation.handler),
     url(r'^dashboard/admin/trafficLog/$', TrafficLog.handler),
-    #url(r'^admin/payment/$', Payment.add_payment),#repeated
-    url(r'^admin/payment/$', Payment.handler),
+    url(r'^dashboard/admin/payment/$', Payment.handler),
 
 ]
 
