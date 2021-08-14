@@ -19,8 +19,34 @@ python manage.py migrate  # Create database tables
 ```
 4. Run TrafficManager using python manage.py runserver
 
-# Note 
+## django_postgresql
+using postgresql database with django
+## INSTALLATION
+Install the postgresql database in your local computer first from the .exe file on the offical site.
+
+Install the postgresql package for python - psycopg2 using pip in virtualenv
+## CONFIGURE
+
+Create a new database using the postgresql command line.
+
+CREATE DATABASE TrafficManager
+
+Inside our django project settings.py, set the database as the postgresql like so,
+```bash
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'TrafficManager',
+        'USER': 'postgres',
+        'PASSWORD': '1234',
+        'HOST': 'localhost',
+        'PORT': '5432',
+
+    }
+```
+Just create models and run makemigrations and migrate command, the new database should work fine.
+
+## Note 
 If you think this repo need to have new usecase feel free to add an issue or send a pull request.
 
-# Author
+## Author
 arashmjr, arash.mjr@gmail.com
