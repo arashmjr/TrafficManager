@@ -20,5 +20,4 @@ class TrafficLogRepository:
         return self.get_logs(road_width=road_width)
 
     def get_logs(self, *args, **kwargs):
-        # print(self.collection.objects.filter(&kwargs))
         return self.collection.objects.filter(*args, **kwargs)

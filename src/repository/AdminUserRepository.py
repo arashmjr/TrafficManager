@@ -1,6 +1,5 @@
 from django.db.models.manager import Manager
 from src.domain.models.AdminUserDomainModel import AdminUserDomainModel
-# from src.domain.entities.AdminUser import AdminUser
 
 
 class AdminUserRepository:
