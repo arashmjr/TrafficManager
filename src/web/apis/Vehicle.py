@@ -1,5 +1,4 @@
 from django.core.handlers.wsgi import WSGIRequest
-
 from src.services.Manager.AuthorizationManager import is_admin_only
 from src.services.core.ServiceProvider import ServiceProvider
 from src.web.dtos.BaseResponse import BaseResponse, BaseError

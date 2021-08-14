@@ -1,5 +1,3 @@
-from logging import LogRecord
-
 from django.db.models.manager import Manager
 from src.domain.models.TrafficLogDomainModel import TrafficLogDomainModel
 

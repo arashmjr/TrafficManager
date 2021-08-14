@@ -1,7 +1,5 @@
 from django.db.models.manager import Manager
 from src.domain.models.DriverDomainModel import DriverDomainModel
-from src.domain.entities.Payment import Payment
-from src.domain.entities.Vehicle import Vehicle
 
 
 class DriverRepository:

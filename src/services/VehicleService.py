@@ -2,8 +2,6 @@ from src.repository.VehicleRepository import VehicleRepository
 from src.repository.DriverRepository import DriverRepository
 from src.domain.models.VehicleDomainModel import VehicleDomainModel
 from src.domain.models.DriverDomainModel import DriverDomainModel
-from django.core.handlers.wsgi import WSGIRequest
-from itertools import chain
 import datetime
 
 
@@ -27,7 +25,7 @@ class VehicleService:
                 if item['type'] == 'heavy':
                     raise Exception("Sorry, this owner can't have more than one heavy vehicle")
 
-        self.repository_vehicle.insert(model)
+        result = self.repository_vehicle.insert(model)
         return True
 
     def get_vehicles_by_color(self, colors):

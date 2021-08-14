@@ -42,7 +42,6 @@ class TrafficLogService:
         desired_date = timezone.now() - timezone.timedelta(minutes=minutes)
         print(desired_date)
         province_logs_by_type = self.repository_log.get_logs(vehicle_type=vehicle_type, province_name=province, date__gte=desired_date)
-        # province_logs_by_type_json = TrafficLogDomainModel.asJSON(province_logs_by_type)
 
         results = []
         if province_logs_by_type is not None:

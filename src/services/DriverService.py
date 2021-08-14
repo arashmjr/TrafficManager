@@ -1,23 +1,17 @@
 from src.repository.DriverRepository import DriverRepository
 from src.repository.PaymentRepository import PaymentRepository
-from src.repository.VehicleRepository import VehicleRepository
 from src.domain.models.DriverDomainModel import DriverDomainModel
 from src.domain.models.PaymentDomainModel import PaymentDomainModel
-from src.domain.models.VehicleDomainModel import VehicleDomainModel
-from django.core.handlers.wsgi import WSGIRequest
 
 
 class DriverService:
     repository_driver: DriverRepository
     repository_payment: PaymentRepository
-    repository_vehicle: VehicleRepository
 
-    def __init__(self, repository_driver: DriverRepository, repository_payment: PaymentRepository,
-                 repository_vehicle: VehicleRepository):
+    def __init__(self, repository_driver: DriverRepository, repository_payment: PaymentRepository):
 
         self.repository_driver = repository_driver
         self.repository_payment = repository_payment
-        self.repository_vehicle = repository_vehicle
 
     def add_driver(self, json):
 
