@@ -12,7 +12,11 @@ To run TrafficManager in development mode; Just use steps below:
 ```bash
 git clone https://github.com/arashmjr/TrafficManager && cd TrafficManager
 virtualenv venv   # Create virtualenv named venv
+<<<<<<< HEAD
 venv\Scripts\activate # If You're On A Windows Machine
+=======
+source venv/Scripts/activate # If You're On A Windows Machine
+>>>>>>> 96901405823b2777a59677d7ebf9290da6ac8a54
 source venv/bin/activate # If You're On A Linux
 pip install -r requirements.txt
 python manage.py migrate  # Create database tables
@@ -49,4 +53,8 @@ Just create models and run makemigrations and migrate command, the new database 
 If you think this repo need to have new usecase feel free to add an issue or send a pull request.
 
 ## Author
+<<<<<<< HEAD
 arashmjr, arash.mjr@gmail.com
+=======
+arashmjr, arash.mjr@gmail.com
+>>>>>>> 96901405823b2777a59677d7ebf9290da6ac8a54
