@@ -12,25 +12,18 @@ To run TrafficManager in development mode; Just use steps below:
 ```bash
 git clone https://github.com/arashmjr/TrafficManager && cd TrafficManager
 virtualenv venv   # Create virtualenv named venv
-<<<<<<< HEAD
-<<<<<<< HEAD
 venv\Scripts\activate # If You're On A Windows Machine
-=======
-source venv/Scripts/activate # If You're On A Windows Machine
->>>>>>> 96901405823b2777a59677d7ebf9290da6ac8a54
-=======
-venv\Scripts\activate # If You're On A Windows Machine
->>>>>>> develop
 source venv/bin/activate # If You're On A Linux
 pip install -r requirements.txt
-python manage.py migrate  # Create database tables
+install and configuration of postgresql using the following sections 
+python manage.py makemigration and python manage.py make migrate  # Create database tables
 ```
 4. Run TrafficManager using python manage.py runserver
 
 ## django_postgresql
 using postgresql database with django
 ## INSTALLATION
-Install the postgresql database in your local computer first from the .exe file on the offical site.
+Install the postgresql database in your local computer first from the .exe file on the official site.
 
 Install the postgresql package for python - psycopg2 using pip in virtualenv
 ## CONFIGURE
@@ -51,20 +44,11 @@ Inside our django project settings.py, set the database as the postgresql like s
 
     }
 ```
-Just create models and run makemigrations and migrate command, the new database should work fine.
+Just create models and run python manage.py makemigrations and migrate command, the new database should work fine.
 
 ## Note 
 If you think this repo need to have new usecase feel free to add an issue or send a pull request.
 
 ## Author
-<<<<<<< HEAD
-<<<<<<< HEAD
-arashmjr, arash.mjr@gmail.com
-=======
-arashmjr, arash.mjr@gmail.com
->>>>>>> 96901405823b2777a59677d7ebf9290da6ac8a54
-=======
 arashmjr, arash.mjr@gmail.com
 
-
->>>>>>> develop
