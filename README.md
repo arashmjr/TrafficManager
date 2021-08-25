@@ -16,7 +16,7 @@ venv\Scripts\activate # If You're On A Windows Machine
 source venv/bin/activate # If You're On A Linux
 pip install -r requirements.txt
 install and configuration of postgresql using the following sections 
-python manage.py makemigration and python manage.py make migrate  # Create database tables
+python manage.py makemigration and python manage.py migrate  # Create database tables
 ```
 4. Run TrafficManager using python manage.py runserver
 

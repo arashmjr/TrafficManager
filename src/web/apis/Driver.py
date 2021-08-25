@@ -7,12 +7,11 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from src.services.Manager.AuthorizationManager import is_admin_only
 import json
-# from src.web.utils.ExtractOwnersVehicles import extract_owners_and_vehicles
 from src.web.adapters.OwnerAdapter import owner_adapter
 from src.web.adapters.VehicleAdapter import vehicle_adapter
 
 
-# @is_admin_only
+@is_admin_only
 @csrf_exempt
 def handler(request):
     if request.method == 'POST':
