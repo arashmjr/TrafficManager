@@ -29,6 +29,8 @@ class PaymentRepository:
             .select_related('vehicle_id',
                             'vehicle_id__owner_id')
         sorted_by_value = join_tables.order_by('value')
+
+        # print(join_with_drivers)
         return sorted_by_value
 
 

@@ -9,19 +9,17 @@ class VehicleRepository:
         self.collection = collection
 
     def insert(self, model: VehicleDomainModel):
+        print(model.to_dict())
         result = self.collection.objects.create(**model.to_dict())
         return result
 
     def find_record_by_colors(self, colors):
         return self.collection.objects.filter(color__in=colors)
 
-    def find_record_by_owner_id(self, owner_id: int):
-        return self.collection.objects.filter(owner_id=owner_id)
-
-    def find_record_by_list_owner_id(self, array: list):
+    def find_record_by_list_national_code(self, array: list):
         list_vehicles = []
         for item in array:
-            records = self.collection.objects.filter(owner_id=item['driver_id'])
+            records = self.collection.objects.filter(national_code=item['national_code'])
             for segment in records:
                 list_vehicles.append(segment)
 
@@ -30,8 +28,15 @@ class VehicleRepository:
     def get_vehicle_by(self, vehicle_ids):
         return self.collection.objects.filter(vehicle_id__in=vehicle_ids)
 
-    def find_record_by_national_code(self, national_code):
-        return self.collection.objects.get(national_code)
+    def find_record_by_national_code(self, national_code: int):
+        return self.collection.objects.filter(national_code=national_code)
+
+    def remove_all(self):
+        x = self.collection.objects.all()
+        y =x.delete()
+        return y
+
+
 
 
 

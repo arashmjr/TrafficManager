@@ -28,9 +28,10 @@ class TrafficLogDomainModel:
         self.longitude = longitude
 
     def to_dict(self):
-        return {
-                "road_id": Road(self.road_id),
-                "vehicle_id": Vehicle(self.vehicle_id),
+
+        converted_dict = {
+                "road_id": Road(self.road_id) if self.road_id is not None else None,
+                "vehicle_id": Vehicle(self.vehicle_id) if self.vehicle_id is not None else None,
                 "vehicle_type": self.vehicle_type,
                 "vehicle_color": self.vehicle_color,
                 "road_width": self.road_width,
@@ -38,8 +39,9 @@ class TrafficLogDomainModel:
                 "province_name": self.province_name,
                 "latitude": self.latitude,
                 "longitude": self.longitude
-
                 }
+
+        return converted_dict
 
     @staticmethod
     def asJSON(logs):

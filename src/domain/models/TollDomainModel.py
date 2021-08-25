@@ -23,7 +23,7 @@ class TollDomainModel:
 
     def to_dict(self):
         return {
-                "road_id": Road(self.road_id),
+                "road_id": Road(self.road_id) if self.road_id is not None else None,
                 "name": self.name,
                 "heavy_vehicle_charge": self.heavy_vehicle_charge,
                 "light_vehicle_charge": self.light_vehicle_charge,

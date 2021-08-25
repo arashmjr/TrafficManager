@@ -17,3 +17,15 @@ class TollStationService:
 
         self.repository_toll.insert(model)
         return True
+
+    def add_list_of_tolls(self, adapted_list):
+
+        for item in adapted_list:
+            model = TollDomainModel(item['road_id'], item['name'], item['heavy_vehicle_charge'],
+                                    item['light_vehicle_charge'], item['heavy_vehicle_charge_per_kg'],
+                                    item['latitude'], item['longitude'])
+
+            self.repository_toll.insert(model)
+
+
+

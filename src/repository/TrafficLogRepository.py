@@ -12,6 +12,10 @@ class TrafficLogRepository:
         result = self.collection.objects.create(**model.to_dict())
         return result
 
+    def bulk_insert(self, models: [TrafficLogDomainModel]):
+        dicts = map(lambda x: x.to_dict(), models)
+        result = self.collection.bulk_create(dicts)
+
     def find_record_by_vehicle_type(self, vehicle_type: str):
         result = self.get_logs(vehicle_type=vehicle_type)
         return result

@@ -24,6 +24,15 @@ class TrafficLogService:
         self.repository_log.insert(model)
         return True
 
+    def add_list_of_logs(self, adapted_list):
+
+        for json in adapted_list:
+            model = TrafficLogDomainModel(json['road_id'], json['vehicle_id'], json['vehicle_type'],
+                                      json['vehicle_color'], json['road_width'], json['date'],
+                                      json['province_name'], json['latitude'], json['longitude'])
+
+            self.repository_log.insert(model)
+
     def get_logs_by(self, max_road_width: int, vehicle_type: str):
         logs = self.repository_log.get_logs(road_width__lte=max_road_width, vehicle_type=vehicle_type)
         return TrafficLogDomainModel.asJSON(logs)

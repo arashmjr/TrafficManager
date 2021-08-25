@@ -7,9 +7,12 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from src.services.Manager.AuthorizationManager import is_admin_only
 import json
+# from src.web.utils.ExtractOwnersVehicles import extract_owners_and_vehicles
+from src.web.adapters.OwnerAdapter import owner_adapter
+from src.web.adapters.VehicleAdapter import vehicle_adapter
 
 
-@is_admin_only
+# @is_admin_only
 @csrf_exempt
 def handler(request):
     if request.method == 'POST':
@@ -23,10 +26,25 @@ def add_drivers(request: WSGIRequest):
     json_data = json.loads(request.body)
 
     try:
-        service = ServiceProvider().make_driver_service()
-        service.add_driver(json_data)
-        response = BaseResponse({}, True, MessageIds.SUCCESS)
-        return JsonResponse(response.serialize(), safe=False, status=status.HTTP_201_CREATED)
+        service_owner = ServiceProvider().make_driver_service()
+        service_vehicle = ServiceProvider().make_vehicle_service()
+        requestType = request.GET.get('requestType')
+
+        if requestType == '1':
+
+            adapted_list_owner = list(map(owner_adapter, json_data))
+            # adapted_list_vehicle = list(map(vehicle_adapter, json_data))
+            adapted_list_vehicle = vehicle_adapter(json_data)
+
+            service_owner.add_list_of_owners(adapted_list_owner)
+            service_vehicle.add_list_of_vehicles(adapted_list_vehicle)
+            response = BaseResponse({}, True, MessageIds.SUCCESS)
+            return JsonResponse(response.serialize(), safe=False, status=status.HTTP_201_CREATED)
+
+        if requestType == '2':
+            service_owner.add_driver(json_data)
+            response = BaseResponse({}, True, MessageIds.SUCCESS)
+            return JsonResponse(response.serialize(), safe=False, status=status.HTTP_201_CREATED)
 
     except ValueError:
         response = BaseError(MessageIds.ERROR_BAD_JSON)
@@ -44,3 +62,5 @@ def get_owners_by_notpaid_status(request: WSGIRequest):
     except ValueError:
         response = BaseError(MessageIds.ERROR_BAD_JSON)
         return JsonResponse(response.serialize(), status=status.HTTP_400_BAD_REQUEST)
+
+

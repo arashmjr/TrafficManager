@@ -3,7 +3,7 @@ from django.contrib import admin
 
 
 class DriverAdmin(admin.ModelAdmin):
-    list_display = ['driver_id', 'name', 'birthdate', 'national_code']
+    list_display = ['national_code', 'name', 'birthdate']
 
 
 admin.site.register(Driver, DriverAdmin)

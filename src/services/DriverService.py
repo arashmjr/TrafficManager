@@ -19,6 +19,11 @@ class DriverService:
         self.repository_driver.insert(model)
         return True
 
+    def add_list_of_owners(self, adapted_list):
+        for item in adapted_list:
+            model = DriverDomainModel(item['national_code'], item['name'], item['birthdate'])
+            self.repository_driver.insert(model)
+
     def get_owners_by_notpaid_status(self):
         sorted_query_by_value = self.repository_payment.join_vehicle_and_payment()
         filtered_results = PaymentDomainModel.as_json(sorted_query_by_value)

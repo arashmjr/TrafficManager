@@ -3,7 +3,7 @@ from django.contrib import admin
 
 
 class RoadAdmin(admin.ModelAdmin):
-    list_display = ['road_id', 'name', 'origin', 'destination', 'minimum_height', 'width']
+    list_display = ['road_id', 'name', 'geom', 'minimum_height', 'width']
 
 
 admin.site.register(Road, RoadAdmin)

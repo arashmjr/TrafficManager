@@ -3,13 +3,14 @@ from src.services.Manager.AuthorizationManager import is_admin_only
 from src.services.core.ServiceProvider import ServiceProvider
 from src.web.dtos.BaseResponse import BaseResponse, BaseError
 from src.web.utils.Localizations import MessageIds
+from src.web.adapters.TrafficLogAdapter import traffic_log_adapter
 from rest_framework import status
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 
 
-@is_admin_only
+# @is_admin_only
 @csrf_exempt
 def handler(request):
     if request.method == 'GET':
@@ -24,9 +25,19 @@ def add_logs(request: WSGIRequest):
 
     try:
         service = ServiceProvider().make_traffic_log_service()
-        service.add_traffic_log(json_data)
-        response = BaseResponse({}, True, MessageIds.SUCCESS)
-        return JsonResponse(response.serialize(), safe=False, status=status.HTTP_201_CREATED)
+        requestType = request.GET.get('requestType')
+
+        if requestType == '1':
+
+            adapted_list = list(map(traffic_log_adapter, json_data))
+            service.add_list_of_logs(adapted_list)
+            response = BaseResponse({}, True, MessageIds.SUCCESS)
+            return JsonResponse(response.serialize(), safe=False, status=status.HTTP_201_CREATED)
+
+        if requestType == '2':
+            service.add_traffic_log(json_data)
+            response = BaseResponse({}, True, MessageIds.SUCCESS)
+            return JsonResponse(response.serialize(), safe=False, status=status.HTTP_201_CREATED)
 
     except ValueError:
         response = BaseError(MessageIds.ERROR_BAD_JSON)
