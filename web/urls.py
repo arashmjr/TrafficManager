@@ -1,6 +1,6 @@
 from django.conf.urls import url
-from src.web.apis import AdminAuth, Driver, Vehicle, Road, TollStation, TrafficLog, Payment
-
+from src.web.apis import AdminAuth, Driver, Vehicle, TollStation, TrafficLog, Payment
+from spatialapp.web.apis import Road
 
 urlpatterns = [
     url(r'^auth/admin/signup$', AdminAuth.sign_up_admin),

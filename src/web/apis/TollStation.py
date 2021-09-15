@@ -9,7 +9,7 @@ from src.web.adapters.TollAdapter import toll_adapter
 import json
 
 
-@is_admin_only
+# @is_admin_only
 @csrf_exempt
 def handler(request):
     if request.method == 'POST':

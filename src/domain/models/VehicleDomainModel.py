@@ -2,7 +2,7 @@ from src.domain.entities.Driver import Driver
 
 
 class VehicleDomainModel:
-    vehicle_id: int
+    plate_number: int
     national_code: int
     color: str
     type: str
@@ -11,9 +11,9 @@ class VehicleDomainModel:
     model: str
     year: int
 
-    def __init__(self, vehicle_id: int, national_code: int, color: str, type: str, weight: int, height: int, model: str, year: int):
+    def __init__(self, plate_number, national_code: int, color: str, type: str, weight: int, height: int, model: str, year: int):
 
-        self.vehicle_id = vehicle_id
+        self.plate_number = plate_number
         self.national_code = national_code
         self.color = color
         self.type = type
@@ -24,7 +24,7 @@ class VehicleDomainModel:
 
     def to_dict(self):
         return {
-                "vehicle_id": self.vehicle_id,
+                "plate_number": self.plate_number,
                 "national_code": Driver(self.national_code),
                 "color": self.color,
                 "type": self.type,
@@ -41,7 +41,7 @@ class VehicleDomainModel:
         for item in vehicles:
 
             result = {
-                'vehicle_id': item.vehicle_id,
+                'plate_number': item.plate_number,
                 'national_code': item.national_code.national_code,
                 'color': item.color,
                 'type': item.type,

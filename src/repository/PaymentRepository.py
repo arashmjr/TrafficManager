@@ -12,8 +12,8 @@ class PaymentRepository:
         result = self.collection.objects.create(**model.to_dict())
         return result
 
-    def find_record_by_date_range(self, date__range: list, vehicle_id: int):
-        return self.collection.objects.filter(date__range=date__range, vehicle_id=vehicle_id)
+    def find_record_by_date_range(self, date__range: list, plate_number: int):
+        return self.collection.objects.filter(date__range=date__range, plate_number=plate_number)
 
     def get_payments_by(self, *args, **kwargs):
         return self.collection.objects.filter(*args, **kwargs)
@@ -26,11 +26,11 @@ class PaymentRepository:
 
     def join_vehicle_and_payment(self):
         join_tables = self.collection.objects.filter(status__icontains='notpaid', value__gte=500) \
-            .select_related('vehicle_id',
-                            'vehicle_id__owner_id')
+            .select_related('plate_number',
+                            'plate_number__national_code',
+                            'plate_number__national_code')
         sorted_by_value = join_tables.order_by('value')
 
-        # print(join_with_drivers)
         return sorted_by_value
 
 

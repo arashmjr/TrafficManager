@@ -10,7 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 
 
-@is_admin_only
+# @is_admin_only
 @csrf_exempt
 def handler(request):
     if request.method == 'GET':
@@ -63,6 +63,7 @@ def get_logs(request: WSGIRequest):
         distance = request.GET.get("distance")
         vehicle_type = request.GET.get("vehicleType")
         minutes = request.GET.get("minutesFromNow")
+
         if province is not None and toll_station_name is not None and distance is not None and vehicle_type is not None:
             logs = service.get_logs_near_toll_station(province, distance, toll_station_name, vehicle_type, int(minutes))
             response = BaseResponse(logs, True, MessageIds.SUCCESS)

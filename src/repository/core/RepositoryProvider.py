@@ -6,7 +6,7 @@ from src.domain.entities.AdminUser import Admin
 from src.domain.entities.Driver import Driver
 from src.domain.entities.Vehicle import Vehicle
 from src.domain.entities.Payment import Payment
-from src.domain.entities.Road import Road
+from spatialapp.domain.entities.Road import Road
 from src.domain.entities.TrafficLog import TrafficLog
 from src.domain.entities.TollStation import TollStation
 from src.repository.RoadRepository import RoadRepository

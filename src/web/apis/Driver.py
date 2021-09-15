@@ -11,7 +11,7 @@ from src.web.adapters.OwnerAdapter import owner_adapter
 from src.web.adapters.VehicleAdapter import vehicle_adapter
 
 
-@is_admin_only
+# @is_admin_only
 @csrf_exempt
 def handler(request):
     if request.method == 'POST':

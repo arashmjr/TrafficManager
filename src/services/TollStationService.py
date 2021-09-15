@@ -14,7 +14,7 @@ class TollStationService:
         model = TollDomainModel(json['road_id'], json['name'], json['heavy_vehicle_charge'],
                                 json['light_vehicle_charge'], json['heavy_vehicle_charge_per_kg'],
                                 json['latitude'], json['longitude'])
-
+        print(model.to_dict())
         self.repository_toll.insert(model)
         return True
 

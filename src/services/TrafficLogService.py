@@ -17,7 +17,7 @@ class TrafficLogService:
     def add_traffic_log(self, json):
 
         date = timezone.now()
-        model = TrafficLogDomainModel(json['road_id'], json['vehicle_id'], json['vehicle_type'],
+        model = TrafficLogDomainModel( json['plate_number'], json['vehicle_type'],
                                       json['vehicle_color'], json['road_width'], date,
                                       json['province_name'], json['latitude'], json['longitude'])
 
@@ -27,7 +27,8 @@ class TrafficLogService:
     def add_list_of_logs(self, adapted_list):
 
         for json in adapted_list:
-            model = TrafficLogDomainModel(json['road_id'], json['vehicle_id'], json['vehicle_type'],
+            # self.repository_log.remove_all()
+            model = TrafficLogDomainModel( json['plate_number'], json['vehicle_type'],
                                       json['vehicle_color'], json['road_width'], json['date'],
                                       json['province_name'], json['latitude'], json['longitude'])
 
@@ -46,10 +47,11 @@ class TrafficLogService:
             raise FileExistsError
 
         station = stations[0]
+        print(station)
         station_location = (station['latitude'], station['longitude'])
 
         desired_date = timezone.now() - timezone.timedelta(minutes=minutes)
-        print(desired_date)
+
         province_logs_by_type = self.repository_log.get_logs(vehicle_type=vehicle_type, province_name=province, date__gte=desired_date)
 
         results = []
@@ -57,6 +59,7 @@ class TrafficLogService:
             for log in province_logs_by_type:
                 log_location = (log.latitude, log.longitude)
                 distance_from_stations = hs.haversine(log_location, station_location) * 1000
+                print(distance_from_stations)
                 if distance_from_stations < int(distance):
                     results.append(log)
 

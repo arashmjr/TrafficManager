@@ -1,31 +1,28 @@
 from src.domain.entities.Vehicle import Vehicle
 from src.domain.entities.TollStation import TollStation
-from src.domain.entities.Road import Road
+from spatialapp.domain.entities.Road import Road
 import datetime
 
 
 class PaymentDomainModel:
-    vehicle_id: int
+    plate_number: int
     toll_id: int
-    road_id: int
     value: int
     date: datetime
     status: str
 
-    def __init__(self, vehicle_id: int, toll_id: int, road_id: int, value: int, date: datetime, status: str):
+    def __init__(self, plate_number: int, toll_id: int, value: int, date: datetime, status: str):
 
-        self.vehicle_id = vehicle_id
+        self.plate_number = plate_number
         self.toll_id = toll_id
-        self.road_id = road_id
         self.value = value
         self.date = date
         self.status = status
 
     def to_dict(self):
         return {
-                "vehicle_id": Vehicle(self.vehicle_id),
+                "plate_number": Vehicle(self.plate_number),
                 "toll_id": TollStation(self.toll_id),
-                "road_id": Road(self.road_id),
                 "value": self.value,
                 "date": self.date,
                 "status": self.status
@@ -38,9 +35,8 @@ class PaymentDomainModel:
         for item in payments:
             result = {
 
-                'vehicle_id': item.vehicle_id.vehicle_id,
+                'plate_number': item.plate_number.plate_number,
                 'toll_id': item.toll_id.toll_id,
-                'road_id': item.road_id.road_id,
                 'value': item.value,
                 'date': item.date,
                 'status': item.status
@@ -53,8 +49,8 @@ class PaymentDomainModel:
         list_payments = []
         for item in payments:
             result = {
-                'owner_id': item.vehicle_id.owner_id.driver_id,
-                'vehicle_id': item.vehicle_id.vehicle_id,
+                'national_code': item.plate_number.national_code.national_code,
+                'plate_number': item.plate_number.plate_number,
                 'value': item.value,
                 'status': item.status
             }

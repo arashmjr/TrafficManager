@@ -8,4 +8,7 @@ class Admin(models.Model):
     password = models.CharField(max_length=50, blank=False)
     creation_date = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        app_label = 'src'
+
 

@@ -1,5 +1,5 @@
 from django.db import models
-from src.domain.entities.Road import Road
+from spatialapp.domain.entities.Road import Road
 
 
 class TollStation(models.Model):

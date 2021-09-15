@@ -19,7 +19,7 @@ class CoreDatabase:
             self.__connect()
 
     def __connect(self):
-        self._connection = psycopg2.connect(database="shop", user='postgres', password='1234', host='localhost', port='5432')
+        self._connection = psycopg2.connect(database="postgres", user='postgres', password='1234', host='localhost', port='5432')
         # Creating a cursor object using the cursor() method
         cursor = self._connection.cursor()
 

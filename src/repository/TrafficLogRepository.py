@@ -25,3 +25,8 @@ class TrafficLogRepository:
 
     def get_logs(self, *args, **kwargs):
         return self.collection.objects.filter(*args, **kwargs)
+
+    def remove_all(self):
+        x = self.collection.objects.all()
+        y =x.delete()
+        return y

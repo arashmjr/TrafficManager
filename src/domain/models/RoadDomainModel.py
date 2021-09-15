@@ -4,8 +4,9 @@ class RoadDomainModel:
     destination: str
     minimum_height: float
     width: float
+    geom: str
 
-    def __init__(self, name: str, origin: str, destination: str, minimum_height: float, width: float):
+    def __init__(self, name: str, origin: str, destination: str, minimum_height: float, width: float, geom: str):
 
         self.name = name
         self.origin = origin
@@ -13,6 +14,7 @@ class RoadDomainModel:
         self.destination = destination
         self.minimum_height = minimum_height
         self.width = width
+        self.geom = geom
 
     def to_dict(self):
         return {
@@ -20,6 +22,8 @@ class RoadDomainModel:
                 "origin": self.origin,
                 "destination": self.destination,
                 "minimum_height": self.minimum_height,
-                "width": self.width
+                "width": self.width,
+                "geom": self.geom
 
                 }
+

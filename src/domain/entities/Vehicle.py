@@ -3,7 +3,8 @@ from src.domain.entities.Driver import Driver
 
 
 class Vehicle(models.Model):
-    vehicle_id = models.BigIntegerField(blank=False, primary_key=True)
+    # vehicle_id = models.BigAutoField(blank=False, primary_key=True)
+    plate_number = models.BigIntegerField(blank=False, primary_key=True)
     national_code = models.ForeignKey(Driver, on_delete=models.CASCADE)
     color = models.CharField(blank=True, max_length=30, null=True)
     type = models.CharField(blank=True, max_length=30, null=True)

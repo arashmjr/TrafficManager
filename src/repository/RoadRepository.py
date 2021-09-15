@@ -11,3 +11,8 @@ class RoadRepository:
     def insert(self, model: RoadDomainModel):
         result = self.collection.objects.create(**model.to_dict())
         return result
+
+    def remove_all(self):
+        x = self.collection.objects.all()
+        y =x.delete()
+        return y

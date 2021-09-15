@@ -15,7 +15,7 @@ class DriverService:
 
     def add_driver(self, json):
 
-        model = DriverDomainModel(json['name'], json['birthdate'], json['national_code'])
+        model = DriverDomainModel(json['national_code'], json['name'], json['birthdate'])
         self.repository_driver.insert(model)
         return True
 
@@ -29,13 +29,7 @@ class DriverService:
         filtered_results = PaymentDomainModel.as_json(sorted_query_by_value)
         print(filtered_results)
 
-        objects_owners = []
-        for item in filtered_results:
-            obj_driver = self.repository_driver.find_record_by_id(item['owner_id'])
-            objects_owners.append(obj_driver)
-
-        list_owners = DriverDomainModel.asJSON(objects_owners)
-        return list_owners
+        return filtered_results
 
 
 

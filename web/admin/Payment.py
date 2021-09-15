@@ -3,7 +3,7 @@ from django.contrib import admin
 
 
 class PaymentAdmin(admin.ModelAdmin):
-    list_display = ['payment_id', 'vehicle_id', 'toll_id', 'road_id', 'value', 'date', 'status']
+    list_display = ['payment_id', 'plate_number', 'toll_id', 'value', 'date', 'status']
 
 
 admin.site.register(Payment, PaymentAdmin)

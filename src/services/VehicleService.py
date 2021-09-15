@@ -15,23 +15,24 @@ class VehicleService:
 
     def add_vehicle(self, json):
 
-        model = VehicleDomainModel(json['national_code'], json['color'], json['type'], json['weight'],
+        model = VehicleDomainModel(json['plate_number'], json['national_code'], json['color'], json['type'], json['weight'],
                                   json['height'], json['model'], json['year'])
-
-        documents = self.repository_vehicle.find_record_by_national_code(model.national_code)
-        records = VehicleDomainModel.asJSON(documents)
-        print(records)
-        if records is not None:
-            for item in records:
-                if item['type'] == 'big':
-                    raise Exception("Sorry, this owner can't have more than one heavy vehicle")
+        if model.type == 'big':
+            documents = self.repository_vehicle.find_record_by_national_code(model.national_code)
+            records = VehicleDomainModel.asJSON(documents)
+            print(records)
+            if records is not None:
+                for item in records:
+                    if item['type'] == 'big':
+                        raise Exception("Sorry, this owner can't have more than one heavy vehicle")
 
         result = self.repository_vehicle.insert(model)
         return True
 
     def add_list_of_vehicles(self, adapted_list):
         for item in adapted_list:
-            model = VehicleDomainModel(item['vehicle_id'], item['national_code'], item['color'], item['type'], item['height'],
+
+            model = VehicleDomainModel(item['plate_number'], item['national_code'], item['color'], item['type'], item['height'],
                                        item['weight'], item['model'], item['year'])
             self.repository_vehicle.insert(model)
 

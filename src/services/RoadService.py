@@ -10,8 +10,18 @@ class RoadService:
         self.repository_road = repository_road
 
     def add_road(self, json):
-
-        model = RoadDomainModel(json['name'], json['origin'], json['destination'], json['minimum_height'], json['width'])
+        # self.repository_road.remove_all()
+        model = RoadDomainModel(json['name'], json['origin'], json['destination'], json['minimum_height'], json['width'],
+                                json['geom'])
 
         self.repository_road.insert(model)
         return True
+
+    def add_list_of_roads(self, adapted_list):
+        for item in adapted_list:
+            model = RoadDomainModel(item['name'], item['origin'], item['destination'],item['minimum_height'],
+                                    item['width'], item['geom'])
+
+            self.repository_road.insert(model)
+
+

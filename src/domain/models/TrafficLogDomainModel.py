@@ -1,11 +1,11 @@
 from src.domain.entities.Vehicle import Vehicle
-from src.domain.entities.Road import Road
+from spatialapp.domain.entities.Road import Road
 import datetime
 
 
 class TrafficLogDomainModel:
-    road_id: int
-    vehicle_id: int
+
+    plate_number: int
     vehicle_type: str
     vehicle_color: str
     road_width: int
@@ -14,11 +14,11 @@ class TrafficLogDomainModel:
     latitude: float
     longitude: float
 
-    def __init__(self, road_id: int, vehicle_id: int, vehicle_type: str, vehicle_color: str, road_width: int,
+    def __init__(self, plate_number: int, vehicle_type: str, vehicle_color: str, road_width: int,
                  date: datetime, province_name: str, latitude: float, longitude: float):
 
-        self.road_id = road_id
-        self.vehicle_id = vehicle_id
+        # self.road_id = road_id
+        self.plate_number = plate_number
         self.vehicle_type = vehicle_type
         self.vehicle_color = vehicle_color
         self.road_width = road_width
@@ -30,8 +30,8 @@ class TrafficLogDomainModel:
     def to_dict(self):
 
         converted_dict = {
-                "road_id": Road(self.road_id) if self.road_id is not None else None,
-                "vehicle_id": Vehicle(self.vehicle_id) if self.vehicle_id is not None else None,
+                # "road_id": Road(self.road_id) if self.road_id is not None else None,
+                "plate_number": Vehicle(self.plate_number) if self.plate_number is not None else None,
                 "vehicle_type": self.vehicle_type,
                 "vehicle_color": self.vehicle_color,
                 "road_width": self.road_width,
@@ -49,8 +49,8 @@ class TrafficLogDomainModel:
         for item in logs:
             result = {
 
-                'road_id': item.road_id.road_id,
-                'vehicle_id': item.vehicle_id.vehicle_id,
+                # 'road_id': item.road_id.road_id,
+                'plate_number': item.plate_number.plate_number,
                 'vehicle_type': item.vehicle_type,
                 'vehicle_color': item.vehicle_color,
                 'road_width': item.road_width,

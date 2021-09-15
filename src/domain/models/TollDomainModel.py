@@ -1,4 +1,4 @@
-from src.domain.entities.Road import Road
+from spatialapp.domain.entities.Road import Road
 
 
 class TollDomainModel:
@@ -37,9 +37,10 @@ class TollDomainModel:
     def asJSON(station_tolls):
         list_station_tolls = []
         for item in station_tolls:
+
             result = {
 
-                'road_id': item.road_id.road_id,
+                # 'road_id': item.road_id.road_id,
                 'name': item.name,
                 'heavy_vehicle_charge': item.heavy_vehicle_charge,
                 'light_vehicle_charge': item.light_vehicle_charge,

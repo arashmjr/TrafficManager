@@ -8,7 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 
 
-@is_admin_only
+# @is_admin_only
 @csrf_exempt
 def handler(request):
     if request.method == 'GET':
@@ -34,11 +34,12 @@ def add_payment(request):
 
 def get_vehicle_payment(request):
     date_range = request.GET.getlist("Date")
-    vehicle_id = request.GET.get("vehicleId")
+    print(date_range)
+    plate_number = request.GET.get("plate_number")
 
     try:
         service = ServiceProvider().make_payment_service()
-        payments = service.get_vehicle_payment_by_date(date_range, int(vehicle_id))
+        payments = service.get_vehicle_payment_by_date(date_range, int(plate_number))
         response = BaseResponse(payments, True, MessageIds.SUCCESS)
         return JsonResponse(response.serialize(), safe=False, status=status.HTTP_200_OK)
 
