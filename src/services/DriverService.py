@@ -29,7 +29,15 @@ class DriverService:
         filtered_results = PaymentDomainModel.as_json(sorted_query_by_value)
         print(filtered_results)
 
+        # objects_owners = []
+        # for item in filtered_results:
+        #     obj_driver = self.repository_driver.find_record_by_national_code(item['national_code'])
+        #     objects_owners.append(obj_driver)
+        #
+        # list_owners = DriverDomainModel.asJSON(objects_owners)
+
         return filtered_results
+
 
 
 

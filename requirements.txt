@@ -1,11 +1,13 @@
 asgiref==3.4.1
+databases==0.5.0
+dj-config-url==0.1.1
 Django==3.2.6
-pytz==2021.1
-sqlparse==0.4.1
+djangorestframework==3.12.4
+GDAL @ file:///C:/Users/arash/Desktop/MyProject/TrafficManager/venv/GDAL-3.2.3-cp38-cp38-win_amd64.whl
+greenlet==1.1.1
+haversine==2.3.1
 psycopg2==2.9.1
 PyJWT==2.1.0
-djangorestframework==3.12.4
-haversine==2.3.1
-
-
-
+pytz==2021.1
+SQLAlchemy==1.4.23
+sqlparse==0.4.1
