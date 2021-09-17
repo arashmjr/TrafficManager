@@ -16,7 +16,11 @@ venv\Scripts\activate # If You're On A Windows Machine
 source venv/bin/activate # If You're On A Linux
 pip install -r requirements.txt
 install and configuration of postgresql using the following sections 
-python manage.py makemigration and python manage.py migrate  # Create database tables
+install postgis using stack Builder
+install OSGeo4W 
+python manage.py makemigrations 
+python manage.py migrate --database=default  # Create database tables
+python manage.py migrate --road=road
 ```
 4. Run TrafficManager using python manage.py runserver
 
@@ -32,19 +36,28 @@ Create a new database using the postgresql command line.
 
 CREATE DATABASE TrafficManager
 
-Inside our django project settings.py, set the database as the postgresql like so,
+Inside our django project settings.py, set the default database as the postgresql 
+and set road database the the postgis like so,
 ```bash
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'TrafficManager',
+        'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': '1234',
         'HOST': 'localhost',
         'PORT': '5432',
 
+    },
+    'road': {
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'postgis_db',
+        'USER': 'postgres',
+        'PASSWORD': '1234',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 ```
-Just create models and run python manage.py makemigrations and migrate command, the new database should work fine.
+Just create models and run python manage.py makemigrations and python manage.py migrate commands, the new databases should work fine.
 
 ## Note 
 If you think this repo need to have new usecase feel free to add an issue or send a pull request.
